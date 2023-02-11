@@ -1,0 +1,28 @@
+.admin-table-container{
+    margin-top: 20px;
+}
+
+.admin-table-container table{
+    width: 100%;
+    overflow-x:auto;
+    border-collapse: collapse;
+}
+
+tr {
+    border-bottom: 1px solid #cdcdcd;
+}
+
+th, td {
+    text-align: start;
+    padding: 10px;
+}
+
+.admin-table-container input:disabled{
+    border: 0px;
+    background-color: transparent;
+}
+
+.delete-select-btn{
+    float: left;
+    padding: 10px;
+}
