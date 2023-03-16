@@ -7,6 +7,7 @@ export const AdminRoleTable = ({
   setAdminData,
   adminShowData,
   setAdminShowData,
+  searchFilterData,
   setSearchFilterData,
 }) => {
   //to enable edit on table
@@ -112,6 +113,7 @@ export const AdminRoleTable = ({
 
   return (
     <div className="admin-table-container">
+      {!adminShowData && <p>No records found</p>}
       <table>
         <thead>
           <tr>

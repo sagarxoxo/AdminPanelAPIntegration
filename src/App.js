@@ -51,6 +51,7 @@ function App() {
         setAdminData={setAdminData}
         adminShowData={adminShowData}
         setAdminShowData={setAdminShowData}
+        searchFilterData={searchFilterData}
         setSearchFilterData={setSearchFilterData}
       />
     </div>
