@@ -12,6 +12,8 @@ function App() {
   //search filtered Table Data
   const [searchFilterData, setSearchFilterData] = useState([]);
 
+  const [showNoRecord, setShowNoRecord] = useState(false);
+
   const handleSearch = (value) => {
     if (value !== "") {
       const filteredData = adminData.filter((item) => {
@@ -20,11 +22,14 @@ function App() {
           .toLowerCase()
           .includes(value.toLowerCase());
       });
+
       setSearchFilterData(filteredData);
     } else {
       setSearchFilterData(adminData);
     }
   };
+
+  console.log(showNoRecord);
 
   useEffect(() => {
     async function fetchData() {
@@ -53,6 +58,7 @@ function App() {
         setAdminShowData={setAdminShowData}
         searchFilterData={searchFilterData}
         setSearchFilterData={setSearchFilterData}
+        showNoRecord={showNoRecord}
       />
     </div>
   );

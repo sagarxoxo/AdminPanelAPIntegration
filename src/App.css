@@ -9,8 +9,17 @@
   width: 100%;
 }
 
+
 @media only screen and (max-width: 800px) {
   .App {
     margin: 40px 10px;
   }
+
+  .input-searchbar {
+    width: 90%;
+    margin: 20px 0px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
 }

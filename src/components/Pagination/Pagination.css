@@ -23,9 +23,9 @@
   @media only screen and (max-width: 800px) {
     .pagination{
       width: 100%;
-      margin: 20px 10px;
+      margin: 20px 0px;
       display: flex;
-    padding: 18px 16px;
       flex-direction: row;
+      flex-wrap: wrap;
     }
   }

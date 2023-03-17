@@ -9,6 +9,7 @@ export const AdminRoleTable = ({
   setAdminShowData,
   searchFilterData,
   setSearchFilterData,
+  showNoRecord,
 }) => {
   //to enable edit on table
   const [disabledId, setDisabledId] = useState();
@@ -111,91 +112,121 @@ export const AdminRoleTable = ({
     setAdminShowData(adminData.slice(0, numberOfData));
   }, [adminData, setAdminShowData]);
 
-  return (
-    <div className="admin-table-container">
-      {!adminShowData && <p>No records found</p>}
-      <table>
-        <thead>
-          <tr>
-            <th>
-              <input
-                type="checkbox"
-                name="check"
-                checked={selectAll}
-                onChange={(e) => handleAllCheckbox(e)}
-              />
-            </th>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Role</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          {adminShowData.map((data, index) => {
-            return (
-              <tr key={index}>
-                <td>
-                  <input
-                    type="checkbox"
-                    name="check"
-                    checked={arrIdData.includes(data.id)}
-                    onChange={(e) => handleCheckbox(data.id, e)}
-                  />
-                </td>
-                <td>
-                  <input
-                    name="name"
-                    type="text"
-                    value={disabledId !== data.id ? data.name : formData.name}
-                    disabled={disabledId !== data.id}
-                    onChange={handleChange}
-                  />
-                </td>
-                <td>
-                  <input
-                    name="email"
-                    type="email"
-                    value={disabledId !== data.id ? data.email : formData.email}
-                    disabled={disabledId !== data.id}
-                    onChange={handleChange}
-                  />
-                </td>
-                <td>
-                  <input
-                    name="role"
-                    type="text"
-                    value={disabledId !== data.id ? data.role : formData.role}
-                    disabled={disabledId !== data.id}
-                    onChange={handleChange}
-                  />
-                </td>
-                <td>
-                  <span>
-                    {disabledId !== data.id ? (
-                      <button onClick={() => editAdmin(data)}>Edit</button>
-                    ) : (
-                      <button onClick={() => saveAdmin(data.id)}>Save</button>
-                    )}
+  console.log(adminShowData);
 
-                    <button onClick={() => deleteAdmin(data.id)}>Delete</button>
-                  </span>
+  return (
+    <div>
+      <div className="admin-table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>
+                <input
+                  type="checkbox"
+                  name="check"
+                  checked={selectAll}
+                  onChange={(e) => handleAllCheckbox(e)}
+                />
+              </th>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Role</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {showNoRecord && (
+              <tr>
+                <td></td>
+                <td></td>
+                <td className="fullW">
+                  <p>No records found</p>
                 </td>
+                <td></td>
+                <td></td>
               </tr>
-            );
-          })}
-        </tbody>
-      </table>
-      <Pagination
-        totalPagesNum={totalPagesNum}
-        currentPage={currentPage}
-        updateTableData={updateTableData}
-      />
-      {arrIdData.length > 0 && (
-        <button className="delete-select-btn" onClick={multipleDelete}>
-          Delete Selected
-        </button>
-      )}
+            )}
+          </tbody>
+          {!showNoRecord && (
+            <tbody>
+              {adminShowData.map((data, index) => {
+                return (
+                  <tr key={index}>
+                    <td>
+                      <input
+                        type="checkbox"
+                        name="check"
+                        checked={arrIdData.includes(data.id)}
+                        onChange={(e) => handleCheckbox(data.id, e)}
+                      />
+                    </td>
+                    <td>
+                      <input
+                        name="name"
+                        type="text"
+                        value={
+                          disabledId !== data.id ? data.name : formData.name
+                        }
+                        disabled={disabledId !== data.id}
+                        onChange={handleChange}
+                      />
+                    </td>
+                    <td>
+                      <input
+                        name="email"
+                        type="email"
+                        value={
+                          disabledId !== data.id ? data.email : formData.email
+                        }
+                        disabled={disabledId !== data.id}
+                        onChange={handleChange}
+                      />
+                    </td>
+                    <td>
+                      <input
+                        name="role"
+                        type="text"
+                        value={
+                          disabledId !== data.id ? data.role : formData.role
+                        }
+                        disabled={disabledId !== data.id}
+                        onChange={handleChange}
+                      />
+                    </td>
+                    <td>
+                      <span>
+                        {disabledId !== data.id ? (
+                          <button onClick={() => editAdmin(data)}>Edit</button>
+                        ) : (
+                          <button onClick={() => saveAdmin(data.id)}>
+                            Save
+                          </button>
+                        )}
+
+                        <button onClick={() => deleteAdmin(data.id)}>
+                          Delete
+                        </button>
+                      </span>
+                    </td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          )}
+        </table>
+      </div>
+      <div>
+        <Pagination
+          totalPagesNum={totalPagesNum}
+          currentPage={currentPage}
+          updateTableData={updateTableData}
+        />
+        {arrIdData.length > 0 && (
+          <button className="delete-select-btn" onClick={multipleDelete}>
+            Delete Selected
+          </button>
+        )}
+      </div>
     </div>
   );
 };
